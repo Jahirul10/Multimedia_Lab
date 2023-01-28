@@ -1,0 +1,50 @@
+#include<bits/stdc++.h>
+using namespace std;
+string input_str,en="",de="",en_r="";
+int main(){
+
+    fstream read,en_write,en_read,de_write;
+    read.open("input.txt",ios::in);
+    en_write.open("en_out.txt",ios::out);
+    if(read.is_open()){
+    string tem;
+    while(getline(read,tem)){
+        input_str+=tem;
+        input_str+="\n";
+    }
+   }
+int i,j,cnt;
+for( i=0;input_str[i]!='\0';i++){
+
+        cnt=0;
+    for( j=i;input_str[i]==input_str[j];j++){
+        cnt++;
+    }
+    i=j-1;
+    en+=input_str[i];
+    en+='(' + to_string(cnt) + ')';
+
+}
+en_write<<en<<endl;
+en_read.open("en_out.txt",ios::in);
+if(en_read.is_open()){
+    string tem;
+    while(getline(en_read,tem)){
+        en_r+=tem;
+        en_r+="\n";
+    }
+   }
+ for(i = 0; en_r[i]; i++){
+        if(en_r[i] == '('){
+            int cnt = 0;
+            for(j = i+1; en_r[j] && en_r[j] != ')'; j++){
+                cnt = cnt*10 + (int)(en_r[j] - '0');
+            }
+            for(j = 0; j < cnt; j++){
+                de+= en_r[i-1];
+            }
+        }
+    }
+de_write.open("output.txt",ios::out);
+de_write<<de<<endl;
+}
